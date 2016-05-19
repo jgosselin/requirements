@@ -5,7 +5,7 @@ AC1: A flag icon appears next to each item during initial data entry.
 AC2: A flag icon appears next to each item during editing.
 AC3: A flag icon appears next to each item in view mode.
 AC4: There is only one flag icon per item.
-AC5: Clicking on the icon (in data entry, edit, or view) opens an widget containing query information.
+AC5: Clicking on the icon (in data entry, edit, or view) opens a widget containing query information.
 AC6: Must be able to add multiple queries to a single item.
 
   Scenario: Entering a query
@@ -92,7 +92,7 @@ AC3: Closing a query should display a confirmation message before automatically 
      Then the query status = 'Closed'
 
 @v1 @ocqw
-Feature: Query widget should automatically closes after query is entered
+Feature: Query widget should automatically close after query is entered
 
 AC1: Submitting a query should automatically exit the query widget.
 AC2: Updating a query should automatically exit the query widget.
@@ -106,31 +106,20 @@ AC3: Closing a query should automatically exit the query widget.
      Then the query status = 'Closed'
 
 @v1 @ocqw 
-Feature: Query widget must display item label.
-  
-AC1: Item label must be displayed.
-AC2: Long item label text must wrap.
-AC3: If item label text is very long, ellipses will be used and text will collapse. 
-AC4: Clicking on ellipses will expand the full text.
+Feature: Item text must be visible while query widget is open.
   
   Scenario: View item and value/response in widget
     Given I want to enter a query
      When I open the query widget
-     Then I must see the current item label in case the item is covered by the widget.
+     Then I must be able to see the current item text.
 	 
 @v1 @ocqw
-Feature: Query widget must display item value or response.
-  
-AC1: Current item value or response text must be displayed under the label.
-AC2: Single-select items display the response text.
-AC3: Multi-select items display selected response text in a bulleted list.
-AC4: Long response text will use ellipses.
-AC5: Clicking on ellipses will expand to show additional text.
+Feature: Item value or response must be visible while query widget is open.
   
   Scenario: View item and value/response in widget
     Given I want to enter a query
      When I open the query widget
-     Then I must see the current value or response in case the item is covered by the widget.
+     Then I must see the current value or response(s).
   
 @v1 @ocqw
 Feature: Query status must be indicated in the query widget.
@@ -301,15 +290,3 @@ So that I don't loose any data.
     Given I am a data entry person
      When I am entering values into an Enketo form
      Then the form should autosave
-
-@v1 @reason_for_change
-Feature: Support for 'Reason for Change' in bulk
-
-As a data entry person that is editing a completed Enketo form
-I want to be able to enter a comment and apply it to all items I've edited
-So that I don't have to enter a query for each item individually.
-
-AC1: User is provided with a list of all items, and corresponding values/responses, that were updated.
-AC2: User can enter a comment and apply it to all items that were updated.
-AC3: If user manually enters a query for one of the updated items, it should not appear in the list.
-
