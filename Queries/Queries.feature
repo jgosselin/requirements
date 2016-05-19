@@ -5,7 +5,7 @@ AC1: A flag icon appears next to each item during initial data entry.
 AC2: A flag icon appears next to each item during editing.
 AC3: A flag icon appears next to each item in view mode.
 AC4: There is only one flag icon per item.
-AC5: Clicking on the icon (in data entry, edit, or view) opens an widget containing query information.
+AC5: Clicking on the icon (in data entry, edit, or view) opens a widget containing query information.
 AC6: Must be able to add multiple queries to a single item.
 
   Scenario: Entering a query
@@ -92,7 +92,7 @@ AC3: Closing a query should display a confirmation message before automatically 
      Then the query status = 'Closed'
 
 @v1 @ocqw
-Feature: Query widget should automatically closes after query is entered
+Feature: Query widget should automatically close after query is entered
 
 AC1: Submitting a query should automatically exit the query widget.
 AC2: Updating a query should automatically exit the query widget.
@@ -106,38 +106,26 @@ AC3: Closing a query should automatically exit the query widget.
      Then the query status = 'Closed'
 
 @v1 @ocqw 
-Feature: Query widget must display item label.
-  
-AC1: Item label must be displayed.
-AC2: Long item label text must wrap.
-AC3: If item label text is very long, ellipses will be used and text will collapse. 
-AC4: Clicking on ellipses will expand the full text.
+Feature: Item text must be visible while query widget is open.
   
   Scenario: View item and value/response in widget
     Given I want to enter a query
      When I open the query widget
-     Then I must see the current item label in case the item is covered by the widget.
+     Then I must be able to see the current item text.
 	 
 @v1 @ocqw
-Feature: Query widget must display item value or response.
-  
-AC1: Current item value or response text must be displayed under the label.
-AC2: Single-select items display the response text.
-AC3: Multi-select items display selected response text in a bulleted list.
-AC4: Long response text will use ellipses.
-AC5: Clicking on ellipses will expand to show additional text.
+Feature: Item value or response must be visible while query widget is open.
   
   Scenario: View item and value/response in widget
     Given I want to enter a query
      When I open the query widget
-     Then I must see the current value or response in case the item is covered by the widget.
+     Then I must see the current value or response(s).
   
 @v1 @ocqw
-Feature: Query status must be indicated in the query widget.
-  
-AC1: The flag must be displayed in the widget.
-AC2: The flag must indicate the status of the query.
-AC3: The statuses are as follows: None, New, Updated, Closed 
+Feature: Query status must be visible while query widget is open.
+
+AC1: The flag must indicate the status of the query.
+AC2: The statuses are as follows: None, New, Updated, Closed 
   
   Scenario: View query status in widget
     Given I want to enter a query
@@ -147,10 +135,9 @@ AC3: The statuses are as follows: None, New, Updated, Closed
 @v1 @ocqw
 Feature: Assign query to another user.
   
-AC1: Dropdown list must appear under the query text area.
-AC2: Dropdown list must contain a list of full names of users assigned to the current Site.
-AC3: Query is assigned to the selected user once the query is submitted.
-AC4: Query remains assigned to that user until it is either re-assigned to another user or closed.
+AC1: Query widget must have a dropdown list of full names of all users assigned to the current Site.
+AC2: Query is assigned to the selected user once the query is submitted.
+AC3: Query remains assigned to that user until it is either re-assigned to another user or closed.
   
   Scenario: Assign query to another user
     Given I am entering a query
@@ -161,7 +148,7 @@ AC4: Query remains assigned to that user until it is either re-assigned to anoth
 @v1 @ocqw
 Feature: Option to email another user.
   
-AC1: Checkbox should appear next to the dropdown of user's names.
+AC1: Checkbox with label 'Notify?' should appear next to the dropdown of user's names.
 AC2: By default, the checkbox is not selected.
 AC3: Selecting the checkbox will send a notification, via email, to the selected user.
 AC4: Notification is sent once the query is submitted.
@@ -174,7 +161,7 @@ AC4: Notification is sent once the query is submitted.
      Then the selected user should receive an email message that a query has been assigned to them.
   
 @v1 @ocqw
-Feature: Query text area is pre-populated with any CRF validation(s).
+Feature: Query text area is pre-populated with triggered constraint error message.
   
 AC1: Query text area is a free text field.
 AC2: Query text area is prepopulated with any constraint error messages that the user triggered during data entry.
@@ -301,15 +288,3 @@ So that I don't loose any data.
     Given I am a data entry person
      When I am entering values into an Enketo form
      Then the form should autosave
-
-@v1 @reason_for_change
-Feature: Support for 'Reason for Change' in bulk
-
-As a data entry person that is editing a completed Enketo form
-I want to be able to enter a comment and apply it to all items I've edited
-So that I don't have to enter a query for each item individually.
-
-AC1: User is provided with a list of all items, and corresponding values/responses, that were updated.
-AC2: User can enter a comment and apply it to all items that were updated.
-AC3: If user manually enters a query for one of the updated items, it should not appear in the list.
-
