@@ -106,38 +106,26 @@ AC3: Closing a query should automatically exit the query widget.
      Then the query status = 'Closed'
 
 @v1 @ocqw 
-Feature: Query widget must display item label.
-  
-AC1: Item label must be displayed.
-AC2: Long item label text must wrap.
-AC3: If item label text is very long, ellipses will be used and text will collapse. 
-AC4: Clicking on ellipses will expand the full text.
+Feature: Item text must be displayed when query widget is open.
   
   Scenario: View item and value/response in widget
     Given I want to enter a query
      When I open the query widget
-     Then I must see the current item label in case the item is covered by the widget.
+     Then I must see the current item text.
 	 
 @v1 @ocqw
-Feature: Query widget must display item value or response.
-  
-AC1: Current item value or response text must be displayed under the label.
-AC2: Single-select items display the response text.
-AC3: Multi-select items display selected response text in a bulleted list.
-AC4: Long response text will use ellipses.
-AC5: Clicking on ellipses will expand to show additional text.
+Feature: Item value or response(s) must be displayed when query widget is open.
   
   Scenario: View item and value/response in widget
     Given I want to enter a query
      When I open the query widget
-     Then I must see the current value or response in case the item is covered by the widget.
+     Then I must see the current value or response(s).
   
 @v1 @ocqw
-Feature: Query status must be indicated in the query widget.
-  
-AC1: The flag must be displayed in the widget.
-AC2: The flag must indicate the status of the query.
-AC3: The statuses are as follows: None, New, Updated, Closed 
+Feature: Query status must be displayed when the query widget is open.
+
+AC1: The flag must indicate the status of the query.
+AC2: The statuses are as follows: None, New, Updated, Closed 
   
   Scenario: View query status in widget
     Given I want to enter a query
