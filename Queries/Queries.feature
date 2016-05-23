@@ -313,3 +313,43 @@ AC1: User is provided with a list of all items, and corresponding values/respons
 AC2: User can enter a comment and apply it to all items that were updated.
 AC3: If user manually enters a query for one of the updated items, it should not appear in the list.
 
+@v1 @enketo_forms_as_oc_forms @ocqw
+Feature: Automatically clear query in initial data entry if item is hidden.
+
+AC1: Queries entered for items that are then hidden based on conditional display logic during data entry should be automatically cleared.
+AC2: Queries entered for items that are then hidden based on conditional display logic during data entry should not be saved.
+AC3: Query status for items that are hidden based on conditional display logic = "None"
+
+	Scenario: 
+		Given I am a data entry person
+		When I am entering values into an Enketo form
+		And I select a response for Item A that shows hidden Item B
+		And I enter a query for Item B
+		And I change my response to Item A so the Item B is hidden again
+		Then the query entered for Item B should be cleared and not saved.
+
+@v1 @enketo_forms_as_oc_forms @ocqw
+Feature: Automatically close query in edit if item is hidden.
+
+AC1: Queries entered for items that are then hidden based on conditional display logic during editing a form should be automatically closed.
+AC2: Query status for items that are hidden based on conditional display logic while editing the form = "Closed"
+
+	Scenario: 
+		Given I am a data entry person
+		When I am editing values in an Enketo form
+		And I change my response to Item A so that Item B is now hidden
+		And there was a query entered for Item B 
+		Then the query entered for Item B should be automatically closed.
+
+@v1 @enketo_forms_as_oc_forms @ocqw		
+Feature: Automatically close query in edit if item is hidden.
+
+AC1: Queries entered for items that are then hidden based on conditional display logic during editing a form should be automatically closed.
+AC2: Query status for items that are hidden based on conditional display logic while editing the form = "Closed"
+
+	Scenario: 
+		Given I am a data entry person
+		When I am editing values in an Enketo form
+		And I change my response to Item A so that Item B is now hidden
+		And there was a query entered for Item B 
+		Then the query entered for Item B should be automatically closed.
